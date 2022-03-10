@@ -6,5 +6,65 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="fr.esgi.crashdetector.fragments.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_tripFragment"
+            app:destination="@id/tripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripFragment"
+        android:name="fr.esgi.crashdetector.fragments.TripFragment"
+        android:label="TripFragment" >
+        <action
+            android:id="@+id/action_tripFragment_to_scootFragment"
+            app:destination="@id/scootFragment" />
+        <action
+            android:id="@+id/action_tripFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_tripFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scootFragment"
+        android:name="fr.esgi.crashdetector.fragments.ScootFragment"
+        android:label="ScootFragment" >
+        <action
+            android:id="@+id/action_scootFragment_to_tripFragment"
+            app:destination="@id/tripFragment" />
+        <action
+            android:id="@+id/action_scootFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_scootFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="fr.esgi.crashdetector.fragments.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_scootFragment"
+            app:destination="@id/scootFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_tripFragment"
+            app:destination="@id/tripFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/runFragment"
+        android:name="fr.esgi.crashdetector.fragments.RunFragment"
+        android:label="RunFragment" >
+        <action
+            android:id="@+id/action_runFragment_to_scootFragment"
+            app:destination="@id/scootFragment" />
+        <action
+            android:id="@+id/action_runFragment_to_tripFragment"
+            app:destination="@id/tripFragment" />
+        <action
+            android:id="@+id/action_runFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

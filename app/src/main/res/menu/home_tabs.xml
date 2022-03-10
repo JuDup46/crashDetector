@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/chartsFragment"
-        android:title="menu1" />
+        android:id="@+id/tripFragment"
+        android:title="Trip" />
     <item
-        android:id="@+id/searchFragment"
-        android:title="menu2" />
+        android:id="@+id/scootFragment"
+        android:title="Scooter" />
     <item
-        android:id="@+id/favoritesFragment"
-        android:title="menu3" />
+        android:id="@+id/profileFragment"
+        android:title="Profile" />
 </menu>
