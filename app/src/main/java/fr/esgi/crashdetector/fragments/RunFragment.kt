@@ -27,9 +27,8 @@ import fr.esgi.crashdetector.R
 import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
-
-
-
+import androidx.navigation.Navigation
+import java.lang.Exception
 
 
 class RunFragment : Fragment(), SensorEventListener {
@@ -84,7 +83,13 @@ class RunFragment : Fragment(), SensorEventListener {
                 if (loAccelerationReader > 0.3 && loAccelerationReader < 0.5) { //FAll
 
                     val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
-                    findNavController().navigate(action)
+//                    findNavController().navigate(action)
+                    try {
+                        this.view?.let { Navigation.findNavController(it).navigate(action) }
+                    } catch (e:Exception){
+                        print(e)
+                    }
+
 
                     val builder = NotificationCompat.Builder(requireContext(), channelId)
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -135,10 +140,6 @@ class RunFragment : Fragment(), SensorEventListener {
             notificationManager.createNotificationChannel(channel)
         }
     }
-    /*
-    If chute = changer de page avec ce code
-
-     */
 
 
 
