@@ -19,6 +19,6 @@ class ScootFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trip, container, false)
+        return inflater.inflate(R.layout.fragment_scoot, container, false)
     }
 }

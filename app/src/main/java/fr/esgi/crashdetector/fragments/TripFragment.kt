@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.Navigation
 import fr.esgi.crashdetector.R
 
 
@@ -21,4 +23,15 @@ class TripFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_trip, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val buttonRun = requireView().findViewById<Button>(R.id.buttonRun);
+        buttonRun.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_tripFragment_to_runFragment);
+        }
+    }
+
+
 }
