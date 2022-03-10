@@ -83,7 +83,6 @@ class RunFragment : Fragment(), SensorEventListener {
                 if (loAccelerationReader > 0.3 && loAccelerationReader < 0.5) { //FAll
 
                     val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
-//                    findNavController().navigate(action)
                     try {
                         this.view?.let { Navigation.findNavController(it).navigate(action) }
                     } catch (e:Exception){
