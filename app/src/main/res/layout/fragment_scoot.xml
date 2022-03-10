@@ -16,34 +16,31 @@
         android:contentDescription="Logo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/welcome_constraint"
+        android:id="@+id/scoot_constraint"
         app:layout_constraintTop_toBottomOf="@id/logo_trip"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/hello_user"
+            android:id="@+id/my_scooters"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="Bonjour"
+            android:text="Mes scooters"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="Nomdugars"
-            app:layout_constraintStart_toEndOf="@id/hello_user"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_marginTop="20dp"
+            android:id="@+id/scoot_spinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aujourd'hui il fait"
-            app:layout_constraintTop_toBottomOf="@id/hello_user"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/my_scooters"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
