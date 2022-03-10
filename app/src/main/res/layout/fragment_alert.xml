@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Les secours ont été prévenus et sont en route vers votre position"
+        android:text="Votre contact à été prévenu, bon courage !"
         android:textSize="30sp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/img_ambu"
