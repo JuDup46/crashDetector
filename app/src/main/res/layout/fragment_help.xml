@@ -1,119 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:id="@+id/app_name_logo_login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/app_name_login"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="@string/app_name"
-            android:textSize="20sp"
-            android:paddingStart="20dp"
-            android:paddingTop="9dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/logo_app_login"/>
-
-
-        <ImageView
-            android:id="@+id/logo_app_login"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            app:layout_constraintStart_toEndOf="@id/app_name_login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/logo_brumaire"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <ImageView
-        android:id="@+id/img_login"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#AA000000"
-        android:scaleType="fitXY"
-        app:layout_constraintTop_toBottomOf="@id/app_name_logo_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/welcome_login"
-        android:contentDescription="TODO" />
-
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/welcome_login"
-        app:layout_constraintTop_toBottomOf="@id/img_login"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Etes-vous tombé ?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/constraintLoginLayout"
-        android:text="Bienvenue"
-        android:textSize="30sp"
-        android:layout_marginTop="20dp"/>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/constraintLoginLayout"
-        app:layout_constraintTop_toBottomOf="@id/welcome_login"
-        app:layout_constraintBottom_toTopOf="@id/button_login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="40dp">
-
-        <EditText
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/editLogin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Login"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            app:layout_constraintTop_toBottomOf="@id/editLogin"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/editPassword"
-            android:hint="ScootId"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingBottom="20dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:text="Connexion"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:id="@+id/button_login"
-        android:backgroundTint="@color/green"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLoginLayout"/>
+        android:id="@+id/buttonYesFall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="OUI"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
+    <Button
+        android:id="@+id/buttonNotFall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NON"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/buttonYesFall"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
