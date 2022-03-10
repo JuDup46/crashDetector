@@ -22,7 +22,11 @@
     <fragment
         android:id="@+id/alertFragment"
         android:name="fr.esgi.crashdetector.fragments.AlertFragment"
-        android:label="AlertFragment" />
+        android:label="AlertFragment" >
+        <action
+            android:id="@+id/action_alertFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
     <fragment
         android:id="@+id/helpFragment"
         android:name="fr.esgi.crashdetector.fragments.HelpFragment"
