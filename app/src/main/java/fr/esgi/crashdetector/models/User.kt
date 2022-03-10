@@ -1,11 +1,15 @@
 package fr.esgi.crashdetector.models
 
-class User (
-    id: Int,
-    lastname: String,
-    firstname: String,
-    email: String,
-    phoneNumber: String,
-    googleId: Int,
-    scooterId: Int
-) {}
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class User(
+    val id: Int,
+    val nom: String,
+    val prenom: String,
+    val email: String,
+    val tel: String,
+    val idgoogle: Int,
+    val idscooter: Int
+): Parcelable

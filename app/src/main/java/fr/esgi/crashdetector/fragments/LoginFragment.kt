@@ -1,7 +1,6 @@
 package fr.esgi.crashdetector.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.esgi.crashdetector.R
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginFragment :  Fragment() {
     override fun onCreateView(
@@ -33,6 +28,5 @@ class LoginFragment :  Fragment() {
         button.setOnClickListener {
             findNavController().navigate(action)
         }
-
     }
 }

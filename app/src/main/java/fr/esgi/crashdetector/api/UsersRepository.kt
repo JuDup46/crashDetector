@@ -15,8 +15,6 @@ object UsersRepository {
             .create(ApiService::class.java)
     }
 
-    suspend fun getUsers() = this.apiService?.getUsers()
-
-    suspend fun getUser(email: String) = this.apiService?.getUser(email)
+    suspend fun getUser(email: String) = this.apiService?.getUserAsync(email)
 
 }
