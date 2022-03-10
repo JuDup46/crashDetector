@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.esgi.crashdetector.R
@@ -27,7 +28,11 @@ class LoginFragment :  Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val navbar: BottomNavigationView = requireActivity().findViewById(R.id.home_bottom_nav)
-//        navbar.visibility = View.GONE
+        val button: Button = view.findViewById(R.id.button_login)
+        val action = LoginFragmentDirections.actionLoginFragmentToRunFragment()
+        button.setOnClickListener {
+            findNavController().navigate(action)
+        }
+
     }
 }
