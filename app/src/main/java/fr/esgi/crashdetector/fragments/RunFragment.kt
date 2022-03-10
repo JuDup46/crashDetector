@@ -7,17 +7,25 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Chronometer
+import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import fr.esgi.crashdetector.R
 import java.text.DecimalFormat
 import kotlin.math.pow
 import kotlin.math.sqrt
+import android.widget.CompoundButton
+
+
+
 
 
 class RunFragment : Fragment(), SensorEventListener {
@@ -64,7 +72,7 @@ class RunFragment : Fragment(), SensorEventListener {
                 )
 
                 if (loAccelerationReader > 0.3 && loAccelerationReader < 0.5) {
-                    requireView().findViewById<TextView>(R.id.runTextView).text = "Fall"
+                    //requireView().findViewById<TextView>(R.id.runTextView).text = "Fall"
                 }
             }
         }
@@ -74,11 +82,26 @@ class RunFragment : Fragment(), SensorEventListener {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val switch: SwitchCompat = view.findViewById(R.id.switch1)
+        val chrono: Chronometer = view.findViewById(R.id.chrono)
+        switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
+                findNavController().navigate(action)
+            }else{
+                chrono.stop()
+            }
+
+        })
+
+    }
+
 
     /*
     If chute = changer de page avec ce code
-    val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
-        findNavController().navigate(action)
+
      */
 
 
