@@ -92,7 +92,7 @@
         <EditText
             app:layout_constraintTop_toBottomOf="@id/editLogin"
             app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/editPassword"
+            android:id="@+id/editScooterId"
             android:hint="ScootId"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

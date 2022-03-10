@@ -10,6 +10,6 @@ data class User(
     val prenom: String,
     val email: String,
     val tel: String,
-    val idgoogle: Int,
-    val idscooter: Int
+    val idgoogle: String,
+    val idscooter: String
 ): Parcelable

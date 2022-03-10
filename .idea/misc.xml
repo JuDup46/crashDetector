@@ -5,16 +5,14 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.2916666666666667" />
         <entry key="..\:/ESGI/2021-2022 4AL/Hackthon/crashDetector/app/src/main/res/layout/fragment_home.xml" value="0.27710843373493976" />
+        <entry key="..\:/ESGI/2021-2022 4AL/Hackthon/crashDetector/app/src/main/res/layout/fragment_login.xml" value="0.17798913043478262" />
         <entry key="..\:/ESGI/2021-2022 4AL/Hackthon/crashDetector/app/src/main/res/menu/home_tabs.xml" value="0.11614583333333334" />
-        <entry key="app/src/main/res/drawable/custom_thumb.xml" value="0.12863247863247862" />
-        <entry key="app/src/main/res/drawable/custom_track.xml" value="0.14102564102564102" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/card_trip.xml" value="0.1833963719522856" />
-        <entry key="app/src/main/res/layout/fragment_help.xml" value="0.18504273504273505" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.30168959485930097" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.240625" />
-        <entry key="app/src/main/res/layout/fragment_run.xml" value="0.21393820146127715" />
+        <entry key="app/src/main/res/layout/fragment_run.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/fragment_scoot.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/fragment_trip.xml" value="0.24394319131161235" />
         <entry key="app/src/main/res/layout/fragment_trun.xml" value="0.240625" />
