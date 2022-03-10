@@ -37,6 +37,7 @@ class RunFragment : Fragment(), SensorEventListener {
     private var notificationManager: NotificationManager? = null
     val channelId = "My_Channel_ID"
     val notificationId = 1
+    var sensorEnabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,7 @@ class RunFragment : Fragment(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        if (event != null) {
+        if (event != null && sensorEnabled) {
 
             if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
 
@@ -113,9 +114,12 @@ class RunFragment : Fragment(), SensorEventListener {
         val chrono: Chronometer = view.findViewById(R.id.chrono)
         switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-                val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
-                findNavController().navigate(action)
+//                val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
+//                findNavController().navigate(action)
+                sensorEnabled = true
+                chrono.start()
             }else{
+                sensorEnabled = false
                 chrono.stop()
             }
 
