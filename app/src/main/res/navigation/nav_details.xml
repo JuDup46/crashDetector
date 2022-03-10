@@ -14,5 +14,21 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="fr.esgi.crashdetector.fragments.RunFragment"
-        android:label="RunFragment" />
+        android:label="RunFragment" >
+        <action
+            android:id="@+id/action_runFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alertFragment"
+        android:name="fr.esgi.crashdetector.fragments.AlertFragment"
+        android:label="AlertFragment" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="fr.esgi.crashdetector.fragments.HelpFragment"
+        android:label="HelpFragment" >
+        <action
+            android:id="@+id/action_helpFragment_to_alertFragment"
+            app:destination="@id/alertFragment" />
+    </fragment>
 </navigation>

@@ -1,4 +1,6 @@
 package fr.esgi.crashdetector.fragments
 
-class AlertFragment {
+import androidx.fragment.app.Fragment
+
+class AlertFragment : Fragment() {
 }

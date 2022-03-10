@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.navigation.fragment.findNavController
 import fr.esgi.crashdetector.R
 import java.text.DecimalFormat
 import kotlin.math.pow
@@ -72,6 +73,15 @@ class RunFragment : Fragment(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
 
     }
+
+
+    /*
+    If chute = changer de page avec ce code
+    val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
+        findNavController().navigate(action)
+     */
+
+
 
 
 }
