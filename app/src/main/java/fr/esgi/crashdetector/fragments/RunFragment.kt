@@ -1,16 +1,25 @@
 package fr.esgi.crashdetector.fragments
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.Context.SENSOR_SERVICE
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.provider.Settings
+import android.util.Log
 import android.widget.Chronometer
 import android.widget.Switch
 import android.widget.TextView
@@ -27,7 +36,9 @@ import fr.esgi.crashdetector.R
 import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
+import androidx.core.app.ActivityCompat
 import androidx.navigation.Navigation
+import fr.esgi.crashdetector.MainActivity
 import java.lang.Exception
 
 
@@ -39,11 +50,12 @@ class RunFragment : Fragment(), SensorEventListener {
     val notificationId = 1
     var sensorEnabled = false
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sensorManager = requireContext().getSystemService(SENSOR_SERVICE) as SensorManager
-
         notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         createNotificationChannel(channelId)
@@ -118,6 +130,7 @@ class RunFragment : Fragment(), SensorEventListener {
 //                findNavController().navigate(action)
                 sensorEnabled = true
                 chrono.start()
+
             }else{
                 sensorEnabled = false
                 chrono.stop()
@@ -143,8 +156,5 @@ class RunFragment : Fragment(), SensorEventListener {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
-
-
 
 }
