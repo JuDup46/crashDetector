@@ -134,7 +134,7 @@ class RunFragment : Fragment(), SensorEventListener {
                         NotificationManagerCompat.from(requireContext()).apply {
                             notify(notificationId, builder.build())
 
-                            val countDownTimer = object : CountDownTimer(5000, 1000) {
+                            val countDownTimer = object : CountDownTimer(15000, 1000) {
                                 override fun onTick(millisUntilFinished: Long) {}
                                 override fun onFinish() {
                                     println("appel")
@@ -235,8 +235,7 @@ class RunFragment : Fragment(), SensorEventListener {
                 MainScope().launch(Dispatchers.Main) {
                     try {
                         var res = withContext(Dispatchers.Main) {
-                            print(locationToSend)
-                            //LocationApiClient.sendCall(inputAsString, locationToSend)
+                            LocationApiClient.sendCall(inputAsString, locationToSend)
                         }
 
                     } catch (e: Exception) {
