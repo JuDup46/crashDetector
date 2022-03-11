@@ -1,5 +1,6 @@
 package fr.esgi.crashdetector.fragments
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -18,6 +19,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
+import android.util.Log
 import android.widget.Chronometer
 import android.widget.Switch
 import android.widget.TextView
@@ -34,6 +36,7 @@ import fr.esgi.crashdetector.R
 import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
+import androidx.core.app.ActivityCompat
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation
 import fr.esgi.crashdetector.MainActivity
@@ -49,6 +52,10 @@ import java.lang.Exception
 
 class RunFragment : Fragment(), SensorEventListener {
 
+    var locationManager: LocationManager? = null
+    var hasGps: Boolean = false
+    var hasNetwork: Boolean= false
+    var locationGps: Location? = null
     private var sensorManager: SensorManager? = null
     private var notificationManager: NotificationManager? = null
     val channelId = "My_Channel_ID"
@@ -122,10 +129,11 @@ class RunFragment : Fragment(), SensorEventListener {
                     NotificationManagerCompat.from(requireContext()).apply {
                         notify(notificationId, builder.build())
 
-                        val countDownTimer = object : CountDownTimer(20000, 1000) {
+                        val countDownTimer = object : CountDownTimer(5000, 1000) {
                             override fun onTick(millisUntilFinished: Long) {}
                             override fun onFinish() {
-                                println("lancer le message")
+                                println("test")
+                                getLocation()
                                 this.cancel()
                             }
                         }
@@ -178,6 +186,63 @@ class RunFragment : Fragment(), SensorEventListener {
     }
 
 
+    private fun getLocation() {
+        locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        hasGps = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        hasNetwork = locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        if (hasGps || hasNetwork) {
 
+            if (hasGps) {
+
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        ActivityCompat.requestPermissions(requireActivity(),
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+                    } else {
+                        ActivityCompat.requestPermissions(requireActivity(),
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+                    }
+                }
+                locationManager!!.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 5000, 0F
+                ) { p0 ->
+                    if (p0 != null) {
+                        locationGps = p0
+                    }
+                }
+
+                val localGpsLocation = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (localGpsLocation != null)
+                    locationGps = localGpsLocation
+
+                val path = requireContext().filesDir
+                val directory = File(path, "mail")
+                val file = File(directory, "email.txt")
+                val inputAsString = FileInputStream(file).bufferedReader().use { it.readText() }
+                Log.d("TAG", inputAsString)
+                //appel api avec :
+                val locationToSend:String = locationGps?.latitude.toString() + "," + locationGps?.longitude.toString()
+
+                MainScope().launch(Dispatchers.Main) {
+                    try {
+                        var res = withContext(Dispatchers.Main) {
+                            LocationApiClient.sendCall(inputAsString, locationToSend)
+                        }
+                        Log.d("CALL", res.toString())
+                    } catch (e: Exception) {
+                        Log.d("CALL", e.toString())
+                    }
+                }
+            }
+        }
+    }
 
 }
