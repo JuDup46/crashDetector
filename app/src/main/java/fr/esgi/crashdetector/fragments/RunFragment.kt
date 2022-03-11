@@ -37,6 +37,10 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation
 import fr.esgi.crashdetector.MainActivity
@@ -48,6 +52,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
 import java.lang.Exception
+import java.security.Permissions
 
 
 class RunFragment : Fragment(), SensorEventListener {
@@ -155,18 +160,16 @@ class RunFragment : Fragment(), SensorEventListener {
         val chrono: Chronometer = view.findViewById(R.id.chrono)
         switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
             if (isChecked){
+                    sensorEnabled = true
 //                val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
 //                findNavController().navigate(action)
-                sensorEnabled = true
-                chrono.start()
             }else{
                 sensorEnabled = false
                 chrono.stop()
             }
-
         })
-
     }
+
 
     private fun createNotificationChannel(channelId:String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

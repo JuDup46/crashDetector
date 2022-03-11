@@ -1,5 +1,7 @@
 package fr.esgi.crashdetector.fragments
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.esgi.crashdetector.R
@@ -44,7 +48,20 @@ class LoginFragment :  Fragment() {
         val button: Button = view.findViewById(R.id.button_login)
         val action = LoginFragmentDirections.actionLoginFragmentToRunFragment()
 
-        button.setOnClickListener {
+        if (!hasRights(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            askPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            //continue
+        } else {
+            if (ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_DENIED
+            ) {
+                ActivityCompat.finishAffinity(requireActivity());
+            }
+        }
+
+            button.setOnClickListener {
 //            var editLogin = view.findViewById<EditText>(R.id.editLogin)
 //            var editScooter = view.findViewById<EditText>(R.id.editScooterId)
 //
@@ -80,9 +97,23 @@ class LoginFragment :  Fragment() {
 //                    }
 //                }
 //            }
-            file.appendText("theo@gmail.com");
-            findNavController().navigate(action)
+                file.appendText("theo@gmail.com");
+                findNavController().navigate(action)
+
+            }
+
 
         }
+
+    private fun hasRights(permission: String): Boolean {
+        return (ContextCompat.checkSelfPermission(
+            requireActivity(),
+            permission
+        ) == PackageManager.PERMISSION_GRANTED)
     }
+
+    private fun askPermission(permission: String) {
+        ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), 1)
+    }
+
 }
