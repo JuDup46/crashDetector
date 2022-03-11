@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -18,13 +17,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import fr.esgi.crashdetector.R
-import fr.esgi.crashdetector.api.ApiClient
 import fr.esgi.crashdetector.api.LocationApiClient
-import fr.esgi.crashdetector.api.LocationApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileInputStream
 
 class AlertFragment : Fragment() {
 
@@ -91,13 +90,18 @@ class AlertFragment : Fragment() {
                 if (localGpsLocation != null)
                     locationGps = localGpsLocation
 
+                val path = requireContext().filesDir
+                val directory = File(path, "mail")
+                val file = File(directory, "email.txt")
+                val inputAsString = FileInputStream(file).bufferedReader().use { it.readText() }
+                Log.d("TAG", inputAsString)
                 //appel api avec :
                 val locationToSend:String = locationGps?.latitude.toString() + "," + locationGps?.longitude.toString()
 
                 MainScope().launch(Dispatchers.Main) {
                     try {
                         withContext(Dispatchers.Main) {
-                            LocationApiClient.sendCall(email, locationToSend)
+                            LocationApiClient.sendCall(inputAsString, locationToSend)
                         }
                     } catch (e: Exception) {
                         Log.d("CALL", "Email or coordinate doesn't exist")
