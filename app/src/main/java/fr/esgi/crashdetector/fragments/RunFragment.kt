@@ -16,6 +16,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.SystemClock
 import android.widget.Chronometer
 import android.widget.Switch
@@ -120,6 +121,16 @@ class RunFragment : Fragment(), SensorEventListener {
 
                     NotificationManagerCompat.from(requireContext()).apply {
                         notify(notificationId, builder.build())
+
+                        val countDownTimer = object : CountDownTimer(20000, 1000) {
+                            override fun onTick(millisUntilFinished: Long) {}
+                            override fun onFinish() {
+                                println("lancer le message")
+                                this.cancel()
+                            }
+                        }
+
+                        countDownTimer.start()
                     }
                 }
             }
