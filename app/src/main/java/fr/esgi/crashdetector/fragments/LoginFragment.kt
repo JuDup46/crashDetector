@@ -19,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileInputStream
 
 class LoginFragment :  Fragment() {
     override fun onCreateView(
@@ -31,6 +33,13 @@ class LoginFragment :  Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val path = requireContext().filesDir
+        val mailDirectory = File(path, "mail")
+        mailDirectory.mkdirs()
+        val file = File(mailDirectory, "email.txt")
+        file.deleteRecursively()
+
+
         super.onViewCreated(view, savedInstanceState)
         val button: Button = view.findViewById(R.id.button_login)
         val action = LoginFragmentDirections.actionLoginFragmentToRunFragment()
@@ -60,6 +69,7 @@ class LoginFragment :  Fragment() {
                                 ApiClient.getUser(editLoginValue)
                             }
                             if (user.idscooter == editScooterValue) {
+                                file.appendText(editLoginValue);
                                 findNavController().navigate(action)
                             } else {
                                 editScooter.error = "Ce modèle n'est pas lié à votre compte."
