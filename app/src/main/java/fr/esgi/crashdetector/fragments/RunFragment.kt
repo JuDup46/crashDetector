@@ -52,6 +52,7 @@ import java.lang.Exception
 
 class RunFragment : Fragment(), SensorEventListener {
 
+    var flagCall = 0
     var locationManager: LocationManager? = null
     var hasGps: Boolean = false
     var hasNetwork: Boolean= false
@@ -106,39 +107,41 @@ class RunFragment : Fragment(), SensorEventListener {
 
                 if (loAccelerationReader > 0.3 && loAccelerationReader < 0.5) { //FAll
 
-                    val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
-                    try {
-                        this.view?.let { Navigation.findNavController(it).navigate(action) }
-                    } catch (e:Exception){
-                        print(e)
-                    }
-
-                    val pendingIntent = NavDeepLinkBuilder(requireContext())
-                        .setComponentName(MainActivity::class.java)
-                        .setGraph(R.navigation.nav_details)
-                        .setDestination(R.id.helpFragment)
-                        .createPendingIntent()
-
-                    val builder = NotificationCompat.Builder(requireContext(), channelId)
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle("Attention!")
-                        .setContentText("Etes vous tombé?")
-                        .setContentIntent(pendingIntent)
-
-
-                    NotificationManagerCompat.from(requireContext()).apply {
-                        notify(notificationId, builder.build())
-
-                        val countDownTimer = object : CountDownTimer(5000, 1000) {
-                            override fun onTick(millisUntilFinished: Long) {}
-                            override fun onFinish() {
-                                println("test")
-                                getLocation()
-                                this.cancel()
-                            }
+                    if(flagCall == 0){
+                        flagCall++
+                        val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
+                        try {
+                            this.view?.let { Navigation.findNavController(it).navigate(action) }
+                        } catch (e:Exception){
+                            print(e)
                         }
 
-                        countDownTimer.start()
+                        val pendingIntent = NavDeepLinkBuilder(requireContext())
+                            .setComponentName(MainActivity::class.java)
+                            .setGraph(R.navigation.nav_details)
+                            .setDestination(R.id.helpFragment)
+                            .createPendingIntent()
+
+                        val builder = NotificationCompat.Builder(requireContext(), channelId)
+                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setContentTitle("Attention!")
+                            .setContentText("Etes vous tombé?")
+                            .setContentIntent(pendingIntent)
+
+
+                        NotificationManagerCompat.from(requireContext()).apply {
+                            notify(notificationId, builder.build())
+
+                            val countDownTimer = object : CountDownTimer(5000, 1000) {
+                                override fun onTick(millisUntilFinished: Long) {}
+                                override fun onFinish() {
+                                    println("appel")
+                                    getLocation()
+                                    this.cancel()
+                                }
+                            }
+                            countDownTimer.start()
+                        }
                     }
                 }
             }
