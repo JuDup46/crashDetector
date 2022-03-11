@@ -6,13 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+    <ImageView
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@mipmap/logo_brumaire"
+        />
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch1"
         android:layout_width="301dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="50dp"
         android:textSize="20sp"
         android:thumb="@drawable/custom_thumb"
@@ -20,7 +28,6 @@
         app:track="@drawable/custom_track" />
 
     <Chronometer
-
         android:id="@+id/chrono"
         android:layout_marginTop="40dp"
         android:layout_width="300dp"
@@ -28,12 +35,6 @@
         android:layout_marginStart="40dp"
         android:gravity="center"
         android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="400dp"
-        android:layout_height="100dp"
-        android:text="waiting"
-        android:id="@+id/textlog"/>
 
 
 </LinearLayout>
