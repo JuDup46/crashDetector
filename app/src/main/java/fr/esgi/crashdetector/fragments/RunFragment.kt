@@ -37,6 +37,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation
 import fr.esgi.crashdetector.MainActivity
@@ -48,6 +49,10 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
 import java.lang.Exception
+import androidx.core.content.ContextCompat.getSystemService
+
+
+
 
 
 class RunFragment : Fragment(), SensorEventListener {
@@ -137,6 +142,7 @@ class RunFragment : Fragment(), SensorEventListener {
                                 override fun onFinish() {
                                     println("appel")
                                     getLocation()
+                                    notificationManager!!.cancel(notificationId)
                                     this.cancel()
                                 }
                             }
