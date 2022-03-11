@@ -1,6 +1,7 @@
 package fr.esgi.crashdetector.api
 
-import fr.esgi.crashdetector.models.User
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface LocationApiService {
@@ -11,6 +12,6 @@ interface LocationApiService {
     }
 
     @GET("$URI/{email}/{coord}")
-    suspend fun sendCall(@Path("email") email: String, @Path("coord") coordinate: String)
+    suspend fun sendCall(@Path("email") email: String, @Path("coord") coordinate: String): Response<ResponseBody>
 
 }

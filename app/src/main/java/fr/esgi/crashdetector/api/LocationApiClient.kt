@@ -1,5 +1,7 @@
 package fr.esgi.crashdetector.api
 
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,9 +13,9 @@ object LocationApiClient {
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-        .create(LocationApiClient::class.java)
+        .create(LocationApiService::class.java)
 
-    suspend fun sendCall(email: String, coordinate: String) {
-        return this.apiService.sendCall(email, coordinate)
+    suspend fun sendCall(email: String, coordinate: String): Int {
+        return this.apiService.sendCall(email, coordinate).code()
     }
 }

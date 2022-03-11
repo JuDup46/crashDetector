@@ -100,11 +100,12 @@ class AlertFragment : Fragment() {
 
                 MainScope().launch(Dispatchers.Main) {
                     try {
-                        withContext(Dispatchers.Main) {
+                        var res = withContext(Dispatchers.Main) {
                             LocationApiClient.sendCall(inputAsString, locationToSend)
                         }
+                        Log.d("CALL", res.toString())
                     } catch (e: Exception) {
-                        Log.d("CALL", "Email or coordinate doesn't exist")
+                        Log.d("CALL", e.toString())
                     }
                 }
             }
