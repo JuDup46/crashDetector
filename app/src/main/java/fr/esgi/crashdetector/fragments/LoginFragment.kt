@@ -72,39 +72,5 @@ class LoginFragment :  Fragment() {
             }
 
         }
-
-        /*
-
-
-            Log.i("AUTH", "$editLogin $editScoot")
-            Log.i("AUTH", editScoot.isNotEmpty().toString())
-            Log.i("AUTH", checkLogin(editLogin, editScoot).toString())
-            if (checkLogin(editLogin, editScoot)) {
-
-            }
-        }
-
-    }
-
-    private fun getUserByEmail(email: String): User? {
-        var userFound: User? = null
-        MainScope().launch(Dispatchers.Main) {
-            val users = withContext(Dispatchers.Main) {
-                ApiClient.getUsers()
-            }
-            for (user in users) {
-                Log.i("AUTH5", user.toString())
-                if (user.email == email) userFound = user
-            }
-        }
-        Log.i("AUTH5", userFound.toString())
-        return userFound
-    }
-
-    private fun checkLogin(email: String, scooterId: String): Boolean {
-        return getUserByEmail(email) != null && scooterId.length >= 10
-    }
-
-     */
     }
 }

@@ -7,6 +7,7 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import fr.esgi.crashdetector.R
+import fr.esgi.crashdetector.api.ApiClient
+import fr.esgi.crashdetector.api.LocationApiClient
+import fr.esgi.crashdetector.api.LocationApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlertFragment : Fragment() {
 
@@ -84,7 +92,17 @@ class AlertFragment : Fragment() {
                     locationGps = localGpsLocation
 
                 //appel api avec :
-                //val locationToSend:String = locationGps?.latitude.toString() + "," + locationGps?.longitude.toString()
+                val locationToSend:String = locationGps?.latitude.toString() + "," + locationGps?.longitude.toString()
+
+                MainScope().launch(Dispatchers.Main) {
+                    try {
+                        withContext(Dispatchers.Main) {
+                            LocationApiClient.sendCall(email, locationToSend)
+                        }
+                    } catch (e: Exception) {
+                        Log.d("CALL", "Email or coordinate doesn't exist")
+                    }
+                }
             }
         }
     }
