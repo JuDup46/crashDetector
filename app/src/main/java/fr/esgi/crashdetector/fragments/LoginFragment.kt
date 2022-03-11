@@ -80,6 +80,7 @@ class LoginFragment :  Fragment() {
 //                    }
 //                }
 //            }
+            file.appendText("theo@gmail.com");
             findNavController().navigate(action)
 
         }
