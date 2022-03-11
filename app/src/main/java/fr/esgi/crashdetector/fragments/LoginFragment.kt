@@ -59,10 +59,10 @@ class LoginFragment :  Fragment() {
                             var user = withContext(Dispatchers.Main) {
                                 ApiClient.getUser(editLoginValue)
                             }
-                            if (editScooterValue.length >= 10) {
+                            if (user.idscooter == editScooterValue) {
                                 findNavController().navigate(action)
                             } else {
-                                editScooter.error = "Le modèle doit contenir au moins 10 caractères."
+                                editScooter.error = "Ce modèle n'est pas lié à votre compte."
                             }
                         } catch (e: Exception) {
                             editLogin.error = "Email inexistant."
