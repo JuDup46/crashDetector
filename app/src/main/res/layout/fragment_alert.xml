@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Votre contact à été prévenu, bon courage !"
+        android:text="Votre contact a été prévenu, bon courage !"
         android:textSize="30sp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/img_ambu"
