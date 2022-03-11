@@ -37,10 +37,14 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
 import androidx.core.app.ActivityCompat
+<<<<<<< HEAD
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.content.PermissionChecker.checkSelfPermission
+=======
+import androidx.core.content.ContextCompat
+>>>>>>> 7e6e7a469809e211a0e4acc3214d9cbef43d1f33
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation
 import fr.esgi.crashdetector.MainActivity
@@ -53,10 +57,12 @@ import java.io.File
 import java.io.FileInputStream
 import java.lang.Exception
 import java.security.Permissions
+import androidx.core.content.ContextCompat.getSystemService
 
 
 class RunFragment : Fragment(), SensorEventListener {
 
+    var flagCall = 0
     var locationManager: LocationManager? = null
     var hasGps: Boolean = false
     var hasNetwork: Boolean= false
@@ -111,39 +117,42 @@ class RunFragment : Fragment(), SensorEventListener {
 
                 if (loAccelerationReader > 0.3 && loAccelerationReader < 0.5) { //FAll
 
-                    val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
-                    try {
-                        this.view?.let { Navigation.findNavController(it).navigate(action) }
-                    } catch (e:Exception){
-                        print(e)
-                    }
-
-                    val pendingIntent = NavDeepLinkBuilder(requireContext())
-                        .setComponentName(MainActivity::class.java)
-                        .setGraph(R.navigation.nav_details)
-                        .setDestination(R.id.helpFragment)
-                        .createPendingIntent()
-
-                    val builder = NotificationCompat.Builder(requireContext(), channelId)
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle("Attention!")
-                        .setContentText("Etes vous tombé?")
-                        .setContentIntent(pendingIntent)
-
-
-                    NotificationManagerCompat.from(requireContext()).apply {
-                        notify(notificationId, builder.build())
-
-                        val countDownTimer = object : CountDownTimer(5000, 1000) {
-                            override fun onTick(millisUntilFinished: Long) {}
-                            override fun onFinish() {
-                                println("test")
-                                getLocation()
-                                this.cancel()
-                            }
+                    if(flagCall == 0){
+                        flagCall++
+                        val action = RunFragmentDirections.actionRunFragmentToHelpFragment()
+                        try {
+                            this.view?.let { Navigation.findNavController(it).navigate(action) }
+                        } catch (e:Exception){
+                            print(e)
                         }
 
-                        countDownTimer.start()
+                        val pendingIntent = NavDeepLinkBuilder(requireContext())
+                            .setComponentName(MainActivity::class.java)
+                            .setGraph(R.navigation.nav_details)
+                            .setDestination(R.id.helpFragment)
+                            .createPendingIntent()
+
+                        val builder = NotificationCompat.Builder(requireContext(), channelId)
+                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setContentTitle("Attention!")
+                            .setContentText("Etes vous tombé?")
+                            .setContentIntent(pendingIntent)
+
+
+                        NotificationManagerCompat.from(requireContext()).apply {
+                            notify(notificationId, builder.build())
+
+                            val countDownTimer = object : CountDownTimer(5000, 1000) {
+                                override fun onTick(millisUntilFinished: Long) {}
+                                override fun onFinish() {
+                                    println("appel")
+                                    getLocation()
+                                    notificationManager!!.cancel(notificationId)
+                                    this.cancel()
+                                }
+                            }
+                            countDownTimer.start()
+                        }
                     }
                 }
             }
