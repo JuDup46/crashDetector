@@ -64,6 +64,8 @@ class HelpFragment : Fragment() {
             try {
                 val action = HelpFragmentDirections.actionHelpFragmentToAlertFragment()
                 findNavController().navigate(action)
+                countDownTimer.cancel()
+                soundCountDownTimer.cancel()
             } catch (e: Exception) {
                 print(e)
             }
@@ -73,6 +75,8 @@ class HelpFragment : Fragment() {
             try {
                 val action = HelpFragmentDirections.actionHelpFragmentToRunFragment()
                 findNavController().navigate(action)
+                countDownTimer.cancel()
+                soundCountDownTimer.cancel()
             } catch (e: Exception) {
                 print(e)
             }
@@ -80,6 +84,8 @@ class HelpFragment : Fragment() {
     }
 
     private fun playSound() {
-        MediaPlayer.create(requireContext(),R.raw.chevre_sound).start()
+        if(context!=null){
+            MediaPlayer.create(context,R.raw.chevre_sound).start()
+        }
     }
 }
