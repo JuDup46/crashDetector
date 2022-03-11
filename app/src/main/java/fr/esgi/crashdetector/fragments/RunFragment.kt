@@ -37,14 +37,6 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import android.widget.CompoundButton
 import androidx.core.app.ActivityCompat
-<<<<<<< HEAD
-import androidx.core.app.ActivityCompat.finishAffinity
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.core.content.PermissionChecker.checkSelfPermission
-=======
-import androidx.core.content.ContextCompat
->>>>>>> 7e6e7a469809e211a0e4acc3214d9cbef43d1f33
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation
 import fr.esgi.crashdetector.MainActivity
@@ -166,7 +158,6 @@ class RunFragment : Fragment(), SensorEventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val switch: SwitchCompat = view.findViewById(R.id.switch1)
-        val chrono: Chronometer = view.findViewById(R.id.chrono)
         switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                     sensorEnabled = true
@@ -174,7 +165,6 @@ class RunFragment : Fragment(), SensorEventListener {
 //                findNavController().navigate(action)
             }else{
                 sensorEnabled = false
-                chrono.stop()
             }
         })
     }
@@ -239,19 +229,18 @@ class RunFragment : Fragment(), SensorEventListener {
                 val directory = File(path, "mail")
                 val file = File(directory, "email.txt")
                 val inputAsString = FileInputStream(file).bufferedReader().use { it.readText() }
-                Log.d("TAG", inputAsString)
                 //appel api avec :
                 val locationToSend:String = locationGps?.latitude.toString() + "," + locationGps?.longitude.toString()
 
                 MainScope().launch(Dispatchers.Main) {
                     try {
                         var res = withContext(Dispatchers.Main) {
-                            print("ca va appeler")
+                            print(locationToSend)
                             //LocationApiClient.sendCall(inputAsString, locationToSend)
                         }
-                        Log.d("CALL", res.toString())
+
                     } catch (e: Exception) {
-                        Log.d("CALL", e.toString())
+
                     }
                 }
             }

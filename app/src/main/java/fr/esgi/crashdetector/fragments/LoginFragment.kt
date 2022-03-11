@@ -61,49 +61,44 @@ class LoginFragment :  Fragment() {
             }
         }
 
-            button.setOnClickListener {
-//            var editLogin = view.findViewById<EditText>(R.id.editLogin)
-//            var editScooter = view.findViewById<EditText>(R.id.editScooterId)
-//
-//            val editLoginValue = editLogin.text.toString().trim()
-//            val editScooterValue = editScooter.text.toString().trim()
-//
-//            when {
-//                editLoginValue.isEmpty() && editScooterValue.isEmpty() -> {
-//                    editLogin.error = "Champ vide"
-//                    editScooter.error = "Champ vide"
-//                }
-//                editLoginValue.isEmpty() -> {
-//                    editLogin.error = "Champ vide"
-//                }
-//                editScooterValue.isEmpty() -> {
-//                    editScooter.error = "Champ vide"
-//                }
-//                else -> {
-//                    MainScope().launch(Dispatchers.Main) {
-//                        try {
-//                            var user = withContext(Dispatchers.Main) {
-//                                ApiClient.getUser(editLoginValue)
-//                            }
-//                            if (user.idscooter == editScooterValue) {
-//                                file.appendText(editLoginValue);
-//                                findNavController().navigate(action)
-//                            } else {
-//                                editScooter.error = "Ce modèle n'est pas lié à votre compte."
-//                            }
-//                        } catch (e: Exception) {
-//                            editLogin.error = "Email inexistant."
-//                        }
-//                    }
-//                }
-//            }
-                file.appendText("theo@gmail.com");
-                findNavController().navigate(action)
+        button.setOnClickListener {
+            var editLogin = view.findViewById<EditText>(R.id.editLogin)
+            var editScooter = view.findViewById<EditText>(R.id.editScooterId)
 
+            val editLoginValue = editLogin.text.toString().trim()
+            val editScooterValue = editScooter.text.toString().trim()
+
+            when {
+                editLoginValue.isEmpty() && editScooterValue.isEmpty() -> {
+                    editLogin.error = "Champ vide"
+                    editScooter.error = "Champ vide"
+                }
+                editLoginValue.isEmpty() -> {
+                    editLogin.error = "Champ vide"
+                }
+                editScooterValue.isEmpty() -> {
+                    editScooter.error = "Champ vide"
+                }
+                else -> {
+                    MainScope().launch(Dispatchers.Main) {
+                        try {
+                            var user = withContext(Dispatchers.Main) {
+                                ApiClient.getUser(editLoginValue)
+                            }
+                            if (user.idscooter == editScooterValue) {
+                                file.appendText(editLoginValue);
+                                findNavController().navigate(action)
+                            } else {
+                                editScooter.error = "Ce modèle n'est pas lié à votre compte."
+                            }
+                        } catch (e: Exception) {
+                            editLogin.error = "Email inexistant."
+                        }
+                    }
+                }
             }
-
-
         }
+    }
 
     private fun hasRights(permission: String): Boolean {
         return (ContextCompat.checkSelfPermission(

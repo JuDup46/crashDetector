@@ -94,19 +94,15 @@ class AlertFragment : Fragment() {
                 val directory = File(path, "mail")
                 val file = File(directory, "email.txt")
                 val inputAsString = FileInputStream(file).bufferedReader().use { it.readText() }
-                Log.d("TAG", inputAsString)
                 //appel api avec :
                 val locationToSend:String = locationGps?.latitude.toString() + "," + locationGps?.longitude.toString()
 
                 MainScope().launch(Dispatchers.Main) {
                     try {
                         var res = withContext(Dispatchers.Main) {
-                            print("ca va appeler")
-                            //LocationApiClient.sendCall(inputAsString, locationToSend)
+                            LocationApiClient.sendCall(inputAsString, locationToSend)
                         }
-                        Log.d("CALL", res.toString())
                     } catch (e: Exception) {
-                        Log.d("CALL", e.toString())
                     }
                 }
             }
