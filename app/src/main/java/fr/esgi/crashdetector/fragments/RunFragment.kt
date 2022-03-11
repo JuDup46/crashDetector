@@ -234,7 +234,8 @@ class RunFragment : Fragment(), SensorEventListener {
                 MainScope().launch(Dispatchers.Main) {
                     try {
                         var res = withContext(Dispatchers.Main) {
-                            LocationApiClient.sendCall(inputAsString, locationToSend)
+                            print("ca va appeler")
+                            //LocationApiClient.sendCall(inputAsString, locationToSend)
                         }
                         Log.d("CALL", res.toString())
                     } catch (e: Exception) {
